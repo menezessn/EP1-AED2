@@ -1,16 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define vertex int;
+
+
 
 //---------Estruturas para fazer listas de adjacências para representar grafos --------------
 
-// estrutura para cada nó da lista de adjacência 
-typedef struct {
-    vertex w; //número do vértice que é vizinho ao vértice v
-    link next; //endereço do nó seguinte da lista
-} node;
+typedef int vertex;
 
-typedef struct node* link; //link é um ponteiro para um nó
+// estrutura para cada nó da lista de adjacência 
+typedef struct aux {
+    vertex w; //número do vértice que é vizinho ao vértice v
+    struct aux* next; //endereço do nó seguinte da lista
+} node;
+typedef node* link; //link é um ponteiro para um nó
+
+
 
 //estrutura que implementa um grafo
 typedef struct {
@@ -19,6 +23,6 @@ typedef struct {
     link* adj; //array de listas de nós
 }graph;
 
-typedef struct graph* pGraph; //pGraph é um ponteiro para um grafo
+typedef graph* pGraph; //pGraph é um ponteiro para um grafo
 
 //----------------------------------------------------------------------------------------------------
