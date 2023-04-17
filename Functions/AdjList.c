@@ -5,7 +5,7 @@
 
 //Função que cria o grafo
 //int V é o número de vértices do grafo
-pGraph graphInit(int V){
+pGraph graphInit(int V, vertexName* names){
     pGraph G = (pGraph) malloc(sizeof(graph));
     G->V = V;
     G->A = 0;
@@ -13,6 +13,7 @@ pGraph graphInit(int V){
     vertex v;
     for (v = 0; v < V; v++){ 
         G->adj[v] = NULL; 
+        G->names[v] = names[v]; 
     }
     return G;
 }
@@ -24,9 +25,20 @@ link newNode( vertex w, link next) {
    a->next = next;     
    return a;                         
 }
+int findVertexIndex(pGraph G, vertexName name) {
+    int i;
+    for(i = 0; i < G->V; i++) {
+        if(strcmp(G->names[i], name) == 0) {
+            return i;
+        }
+    }
+    return -1; // retorna -1 se não encontrar o vértice com o nome especificado
+}
 
 //Insere o novo nó grafo, criando uma nova aresta
-void graphInsertArc(pGraph G, vertex v, vertex w){
+void graphInsertArc(pGraph G, vertexName nv, vertexName nw){
+    vertex v = findVertexIndex(G, nv);
+    vertex w = findVertexIndex(G, nw);
     link a = G->adj[v];
     while(a != NULL){
         if(a->w == w) return;
@@ -41,9 +53,9 @@ void printGraph(pGraph G){
     int i = 0;
     for(i = 0 ; i < G->V ; i++){
         link node = G->adj[i];
-        printf ("Lista de adjacencias do vertice %d: \n", i);
+        printf ("Lista de adjacencias do vertice %s: \n", G->names[i]);
         while(node != NULL){
-            printf ("%d -> ", node->w);
+            printf ("%s -> ", G->names[node->w]);
             node = node->next;
         }
         printf("\n");

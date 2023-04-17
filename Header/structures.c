@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 
 //---------Estruturas para fazer listas de adjacências para representar grafos --------------
 
 typedef int vertex;
+typedef char* vertexName;
 
 // estrutura para cada nó da lista de adjacência 
 typedef struct aux {
@@ -20,6 +22,7 @@ typedef node* link; //link é um ponteiro para um nó
 typedef struct {
     int V; //número de vértices do grafo
     int A; //número de arestas do grafo
+    vertexName* names; //array com os nomes dos vértices
     link* adj; //array de listas de nós
 }graph;
 
