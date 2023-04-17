@@ -6,10 +6,12 @@ void main(){
     for(i=0 ; i<4 ; i++){
         nomes[i] = (char*)malloc(sizeof(char)*1);
     }
-    nomes[1][1] = "a";
-    nomes[2][1] = "b";
-    nomes[3][1] = "c";
-    nomes[4][1] = "e";
+    
+    strcpy(nomes[1][1],"a");
+    strcpy(nomes[1][2],"b");
+    strcpy(nomes[1][3],"c");
+    strcpy(nomes[1][4],"e");
+    
     pGraph G = graphInit(4, nomes);
     graphInsertArc(G, "a", "b");
     graphInsertArc(G, "a", "c");
