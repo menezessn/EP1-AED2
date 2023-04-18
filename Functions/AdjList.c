@@ -5,15 +5,16 @@
 
 //Função que cria o grafo
 //int V é o número de vértices do grafo
-pGraph graphInit(int V, vertexName* names){
+pGraph graphInit(int V, char** names ){
     pGraph G = (pGraph) malloc(sizeof(graph));
     G->V = V;
     G->A = 0;
-    G->adj = malloc (V*sizeof(link));
-    vertex v;
+    G->adj = (link*) malloc (V*sizeof(link));
+    G->names = (char**) malloc (sizeof(char**)*V);
+    int v;
     for (v = 0; v < V; v++){ 
         G->adj[v] = NULL; 
-        G->names[v] = names[v]; 
+        strcpy( G->names[v], names[v]);
     }
     return G;
 }
