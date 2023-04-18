@@ -8,20 +8,21 @@ void main(){
     }
 
     
-    strcpy(nomes[0],"anta");
+    strcpy(nomes[0],"a");
     strcpy(nomes[1],"b");
     strcpy(nomes[2],"c");
     strcpy(nomes[3],"e");
     printf("%s", nomes[0]);
     pGraph G = graphInit(4, nomes);
+
     printf("hello world");
-    // graphInsertArc(G, "a", "b");
-    // graphInsertArc(G, "a", "c");
-    // graphInsertArc(G, "b", "e");
-    // graphInsertArc(G, "c", "e");
-    // graphInsertArc(G, "e", "a");
+    graphInsertArc(G, "a", "b");
+    graphInsertArc(G, "a", "c");
+    graphInsertArc(G, "b", "e");
+    graphInsertArc(G, "c", "e");
+    graphInsertArc(G, "e", "a");
     
     printf("hello world");
-    //printGraph(G);
-    //printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A);
+    printGraph(G);
+    printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A);
 }

@@ -11,6 +11,10 @@ pGraph graphInit(int V, char** names ){
     G->A = 0;
     G->adj = (link*) malloc (V*sizeof(link));
     G->names = (char**) malloc (sizeof(char**)*V);
+    int i;
+    for (i = 0 ; i<V ; i++){
+        G->names[i] = (char*) malloc (sizeof(char)*20);
+    }
     int v;
     for (v = 0; v < V; v++){ 
         G->adj[v] = NULL; 
