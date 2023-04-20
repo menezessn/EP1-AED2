@@ -26,15 +26,30 @@ char** convertInput (char* fileName, int num){
 	while(!feof(fp)){
 		//printf ("\nlendo linha %d ", v);
 		fgets (input[v], 100, fp );
+		input[v][strcspn(input[v], "\n")] = 0;
 		//printf ("\nconteudo: %s ", input[v]);
 		v++;
 	}
 	fclose(fp);
 	return input;
 }
+//faz uma cópia dos inputs
+char** copyInput (char** input, int num){
+	char** inputCopy = (char**) malloc (sizeof(char*)*(num+2));
+	int i;
+	for (i = 0 ; i<(num+2) ; i++){
+		inputCopy[i] = (char*) malloc (sizeof(char)*100);
+	}
+
+	for (i=0 ; i<(num+2) ; i++) {
+		strcpy(inputCopy[i], input[i]);
+	}
+		return inputCopy;
+}
 
 
 char ** readVertexNames(char** input, int num){
+	char** inputCopy = copyInput(input, num);
 	char delimiters[] = ":";
 	char** names = (char**) malloc ((num)*sizeof(char*));
     int i;
@@ -42,7 +57,30 @@ char ** readVertexNames(char** input, int num){
         names[i] = (char*) malloc (sizeof(char)*20);
     }
 	for(i = 0 ; i<num ; i++){
-		names[i] = strtok(input[i+1], delimiters);
+		names[i] = strtok(inputCopy[i+1], delimiters);
 	}
 	return names;
+}
+
+void inputInsertArc(pGraph G, int num, char** input, char** names){
+	char** inputCopy = copyInput(input, num);
+	char delimiters[] = ":;";
+
+	int i = 1;
+
+	while(i<num+1){
+		char* vertexW = strtok(inputCopy[i], delimiters);
+		while(vertexW != NULL){
+			//printf("%s;", vertexW);
+			if(strcmp(vertexW, names[i-1])==0){
+				vertexW = strtok(NULL, delimiters);
+				continue;
+			}
+			graphInsertArc(G, names[i-1], vertexW);
+			vertexW = strtok(NULL, delimiters);
+		}
+		//printf("\n");
+		i++;
+	}
+	
 }

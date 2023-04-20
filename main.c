@@ -12,7 +12,7 @@ void main(){
 		v++;
 	}
 
-    printf("\n-------------------\n");
+    printf("\n---------vertex names----------\n");
 
     char** names = readVertexNames(input, num);
     v = 0;
@@ -21,6 +21,27 @@ void main(){
         printf("%s\n", names[v]);
         v++;
     }
+
+    printf("\n-------------------\n");
+
+    pGraph G = graphInit(num, names);
+
+    printf("\n---------input arcs ----------\n");
+
+    inputInsertArc(G, num, input, names);
+
+    // printf("\n----------teste---------\n");
+
+    // char delimiters[] = ":;";
+    // char* fonte = input[1];
+    // printf("input 1: %s \n", fonte);
+    
+    // strtok(fonte, delimiters);
+    // printf("fonte: %s\n", fonte);
+    // fonte = strtok(NULL, delimiters);
+    // printf("nova fonte:  %s\n", fonte);
+    
+    printGraph(G);
     
 
 
@@ -47,6 +68,6 @@ void main(){
     
     // printf("hello world");
     // printGraph(G);
-    // printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A);
+    printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A);
 
 }

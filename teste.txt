@@ -6,6 +6,6 @@ shirt:belt;tie;
 tie:jacket;
 jacket:
 socks:shoes;
-shoes: 
+shoes:
 watch:
 2

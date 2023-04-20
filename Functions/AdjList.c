@@ -10,7 +10,7 @@ pGraph graphInit(int V, char** names ){
     G->V = V;
     G->A = 0;
     G->adj = (link*) malloc (V*sizeof(link));
-    G->names = (char**) malloc (sizeof(char**)*V);
+    G->names = (char**) malloc (sizeof(char*)*V);
     int i;
     for (i = 0 ; i<V ; i++){
         G->names[i] = (char*) malloc (sizeof(char)*20);
@@ -58,9 +58,9 @@ void printGraph(pGraph G){
     int i = 0;
     for(i = 0 ; i < G->V ; i++){
         link node = G->adj[i];
-        printf ("Lista de adjacencias do vertice %s: \n", G->names[i]);
+        printf ("%s:", G->names[i]);
         while(node != NULL){
-            printf ("%s -> ", G->names[node->w]);
+            printf ("%s;", G->names[node->w]);
             node = node->next;
         }
         printf("\n");
