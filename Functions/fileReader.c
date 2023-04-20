@@ -47,7 +47,7 @@ char** copyInput (char** input, int num){
 		return inputCopy;
 }
 
-
+//Le o input e retorna um array com os nomes dos vértices
 char ** readVertexNames(char** input, int num){
 	char** inputCopy = copyInput(input, num);
 	char delimiters[] = ":";
@@ -62,6 +62,7 @@ char ** readVertexNames(char** input, int num){
 	return names;
 }
 
+//Faz as inserções de arestas no grafo
 void inputInsertArc(pGraph G, int num, char** input, char** names){
 	char** inputCopy = copyInput(input, num);
 	char delimiters[] = ":;";
