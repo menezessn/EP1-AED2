@@ -1,6 +1,6 @@
 #include "adjList.c"
 
-//funções de leitura de arquivo para receber entradas
+//---------funções de leitura de arquivo para receber entradas-------------------
 
 //le a primeira linha do output pra verificar a quantidade de vértices que a entrada vai ter
 int readFirstLine (char* fileName) {
