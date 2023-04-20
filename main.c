@@ -1,6 +1,17 @@
-#include "Functions/AdjList.c"
+#include "Functions/FileReader.c"
 
 void main(){
+    int num = readFirstLine("teste.txt");
+    printf("%d\n", num);
+
+    char** input = convertInput("teste.txt", num);
+    int v = 0;
+	while(v < (num+2)){
+		printf ("\nlendo linha %d ", v);
+		printf ("\nconteudo: %s ", input[v]);
+		v++;
+	}
+
     // char** nomes = (char**) malloc (sizeof(char*)*4);
     // int i;
     // for (i = 0 ; i<4 ; i++){
