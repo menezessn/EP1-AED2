@@ -17,14 +17,15 @@ char** convertInput (char* fileName, int num){
 	char** input = (char**) malloc ((num+2)*sizeof(char*));
     int i;
     for (i = 0 ; i<(num+2) ; i++){
-        input[i] = (char*) malloc (sizeof(char)*20);
+        input[i] = (char*) malloc (sizeof(char)*100);
     }
+	
 	FILE *fp;
 	fp= fopen(fileName, "r");
 	int v = 0;
 	while(!feof(fp)){
 		//printf ("\nlendo linha %d ", v);
-		fgets (input[v], 20, fp );
+		fgets (input[v], 100, fp );
 		//printf ("\nconteudo: %s ", input[v]);
 		v++;
 	}
@@ -32,3 +33,16 @@ char** convertInput (char* fileName, int num){
 	return input;
 }
 
+
+char ** readVertexNames(char** input, int num){
+	char delimiters[] = ":";
+	char** names = (char**) malloc ((num)*sizeof(char*));
+    int i;
+    for (i = 0 ; i<(num) ; i++){
+        names[i] = (char*) malloc (sizeof(char)*20);
+    }
+	for(i = 0 ; i<num ; i++){
+		names[i] = strtok(input[i+1], delimiters);
+	}
+	return names;
+}

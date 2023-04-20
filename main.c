@@ -2,15 +2,27 @@
 
 void main(){
     int num = readFirstLine("teste.txt");
-    printf("%d\n", num);
+    //printf("%d\n", num);
 
     char** input = convertInput("teste.txt", num);
-    int v = 0;
+     int v = 0;
 	while(v < (num+2)){
-		printf ("\nlendo linha %d ", v);
+		printf ("\nlendo linha %d ", (v+1));
 		printf ("\nconteudo: %s ", input[v]);
 		v++;
 	}
+
+    printf("\n-------------------\n");
+
+    char** names = readVertexNames(input, num);
+    v = 0;
+    while (v<num)
+    {
+        printf("%s\n", names[v]);
+        v++;
+    }
+    
+
 
     // char** nomes = (char**) malloc (sizeof(char*)*4);
     // int i;

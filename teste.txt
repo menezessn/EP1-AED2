@@ -1,6 +1,11 @@
-4
-linha 2
-linha 3
-linha 4
-linha 5
-linha 6
+9
+undershorts:pants;shoes;
+pants:belt;shoes;
+belt:jacket;
+shirt:belt;tie;
+tie:jacket;
+jacket:
+socks:shoes;
+shoes: 
+watch:
+2
