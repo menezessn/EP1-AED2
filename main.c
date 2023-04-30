@@ -13,7 +13,7 @@ void main(int argc, char *argv[]){
     // printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
 
     printf("\nTeste 2:\n");
-    pGraph rand = graphRand(10,9);
+    pGraph rand = graphRandER(5,5);
     printGraph(rand);
 
     // int sc[G->V];

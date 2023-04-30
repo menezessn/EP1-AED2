@@ -17,3 +17,7 @@
 //         list = list->next; // avança para o próximo vértice adjacente
 //     }
 // }
+
+//Função que faz a busca em profundidade
+
+
