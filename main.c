@@ -12,7 +12,14 @@ void main(int argc, char *argv[]){
     // printGraph(G); //imprime o grafo
     // printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
 
-    // printf("\nTeste 2:\n");
-    // pGraph rand = graphRand(10,9);
-    // printGraph(rand);
+    printf("\nTeste 2:\n");
+    pGraph rand = graphRand(10,9);
+    printGraph(rand);
+
+    // int sc[G->V];
+    // GRAPHstrongCompsK(G, sc, names, input);
+
+    // //linha 12 e 13 apenas para ver o funcionamento do programa, dps deverão ser excluídas
+    // printGraph(G); //imprime o grafo
+    // printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
 }

@@ -1,4 +1,4 @@
-#include "DFS.c"
+#include "kosarajuAlgorithm.c"
 
 /* A função randV() devolve um vértice aleatório do grafo G. Vamos supor que G->V <= RAND_MAX. */
 vertex randV( pGraph G) { 
