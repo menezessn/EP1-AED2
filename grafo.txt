@@ -1,6 +1,12 @@
-4
-a: b; c;
-b: e;
-c: e;
-e: a;
+10
+a:b;g;
+b:c;f;
+c:b;d;
+d:e;
+e:d;
+f:c;
+g:h;i;
+h:d;g;j;
+i:h;
+j:
 1
