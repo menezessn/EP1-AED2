@@ -9,7 +9,7 @@ void DFS(pGraph G, int v, int *visited, int *discTime) {
     vertex w;
     link list = G->adj[v];
     while(list != NULL) {
-        w = list->next;
+        w = list->w;
         if(!visited[w]) { // se o vértice ainda não foi visitado
             discTime[w] = discTime[v] + 1; // atualiza o tempo de descoberta
             DFS(G, w, visited, discTime); // chama a DFS recursivamente
