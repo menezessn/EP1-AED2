@@ -13,7 +13,7 @@ void main(int argc, char *argv[]){
     printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
     int* sc;
     int k = GRAPHstrongCompsK(G, sc, names);
-    printf("%d", k);
+    printf("Quantidade de componentes fortemente conectados: %d", k);
 
     // printf("\nTEste do grafo reverso\n");
     // pGraph reverse = createReverseGraph(G, names);
