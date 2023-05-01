@@ -1,4 +1,4 @@
-#include "kosarajuAlgorithm.c"
+#include "randomGraph.c"
 
 
 int GRAPHstrongCompsKV2( pGraph G, int *sc,char** names) // recebe o grafo e um vetor que servirá para mapear os vértices fortemente conexos
