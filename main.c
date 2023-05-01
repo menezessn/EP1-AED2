@@ -1,4 +1,5 @@
 #include "Functions/kosarajuAlgorithmV2.c"
+#include "Functions/kosarajuAlgorithmV2.c"
 
 void main(int argc, char *argv[]){
     //if(argc<2) return;
