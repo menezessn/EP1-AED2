@@ -11,7 +11,7 @@ void visitP(pGraph G, int u, int* cor, List topological){
     link v = G->adj[u];
     while(v){ //enquanto tiver adjacências
         if(cor[v->w] == 0){
-            visitP(G, v->w, cor, topological);
+            visitP(G, v->w, cor, topological);  
         }
         v = v->next;
     }
