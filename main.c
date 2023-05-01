@@ -11,5 +11,26 @@ void main(int argc, char *argv[]){
     //linha 12 e 13 apenas para ver o funcionamento do programa, dps deverão ser excluídas
     printGraph(G); //imprime o grafo
     printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
+    int* sc;
+    int k = GRAPHstrongCompsK(G, sc, names);
+    printf("%d", k);
+
+    // printf("\nTEste do grafo reverso\n");
+    // pGraph reverse = createReverseGraph(G, names);
+    // printGraph(reverse);
+
+    // printf("\nTeste grafo aleatorio:\n");
+    // char** namesRand;
+    // pGraph rand = graphRandER(5,5, namesRand);
+    // printGraph(rand);
+
+    
+
+    // int sc[G->V];
+    // GRAPHstrongCompsK(G, sc, names, input);
+
+    // //linha 12 e 13 apenas para ver o funcionamento do programa, dps deverão ser excluídas
+    // printGraph(G); //imprime o grafo
+    // printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
 }
 

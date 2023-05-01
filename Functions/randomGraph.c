@@ -1,8 +1,8 @@
 #include "kosarajuAlgorithm.c"
 
 
-pGraph graphRandER( int V, int A) { 
-    char ** names = (char**) malloc(V*sizeof(char*));
+pGraph graphRandER( int V, int A, char** names) { 
+    names = (char**) malloc(V*sizeof(char*));
     int i;
     for(i = 0; i<V; i++){
             names[i] = (char*) malloc(sizeof(char));
