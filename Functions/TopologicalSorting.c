@@ -18,6 +18,7 @@ void DFS (pGraph G){
         }
     }
 }
+
 //função para visitar todos os vértices
 void visitP(pGraph G, int u, int* cor){
     cor[u] = 1; //marca como 1 o nó visitado
