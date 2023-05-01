@@ -1,4 +1,4 @@
-#include "Functions/randomGraph.c"
+#include "Functions/kosarajuAlgorithmV2.c"
 
 void main(int argc, char *argv[]){
     //if(argc<2) return;
@@ -12,7 +12,8 @@ void main(int argc, char *argv[]){
     printGraph(G); //imprime o grafo
     printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
     int* sc = (int*) malloc(sizeof(int)*G->V);
-    int k = GRAPHstrongCompsK(G, sc, names);
+
+    int k = GRAPHstrongCompsKV2(G, sc, names);
 
     printf("Quantidade de componentes fortemente conectados: %d", k);
 
