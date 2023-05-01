@@ -1,8 +1,10 @@
 #include "fileReader.c"
 
-static int cnt, pre[1000]; // pre salva o tempo de descoberta
-static int cntt, post[1000]; //post salva o tempo que foi visitado 
+static int cnt, p[1000]; // p salva o tempo de descoberta
+static int cntt, d[1000]; //d salva o tempo que foi visitado 
 static vertex vv[1000];
+
+//VERSÃO 1 DO ALGORTIMO DE KORASAJU
 
 //faz uma cópia do array de nomes do array original
 char** copyNames (char** names, int V){
@@ -17,7 +19,8 @@ char** copyNames (char** names, int V){
 	}
 		return namesCopy;
 }
- //cria um grafo reverso
+
+//cria um grafo reverso
 pGraph createReverseGraph( pGraph G,char** names) {
    char** namesCopy = copyNames(names, G->V);
    pGraph GR = graphInit( G->V, namesCopy);
@@ -29,9 +32,9 @@ pGraph createReverseGraph( pGraph G,char** names) {
       }
       
    }      
-   return GR;
+   return GR;//retorna o grafo reverso
 }
-
+//busca em profundidade para o grafo
 static void dfsRstrongCompsK( pGraph G, vertex v, int *sc, int k) { 
    sc[v] = k;
    link a = G->adj[v];
@@ -42,43 +45,46 @@ static void dfsRstrongCompsK( pGraph G, vertex v, int *sc, int k) {
       a = a->next;
    } 
 }
+//busca em profundidade para o grafo reverso
 static void dfsR( pGraph GR, vertex v) 
 { 
-   pre[v] = cnt++; 
+   p[v] = cnt++; 
    link a = GR->adj[v];
    while(a != NULL){
-      if (pre[a->w] == -1){
+      if (p[a->w] == -1){
          dfsR( GR, a->w); 
       }
       a = a->next;
    }
-   post[v] = cntt++;
+   d[v] = cntt++;
 }
-int GRAPHstrongCompsK( pGraph G, int *sc,char** names) // recebe o grafo e um vetor que servirá para mapear os vértices fortemente conexos
+
+
+int graphStrongCompsK( pGraph G, int *sc,char** names) // recebe o grafo e um vetor que servirá para mapear os vértices fortemente conexos
 {
-   
-   // fase 1:
+   //criação do grafo reverso
    pGraph GR = createReverseGraph( G,names);
+
+   //chamando busca em profundidade para o grafo reverso
    cnt = 0; 
    cntt = 0;
    vertex v; 
    for (v = 0; v < GR->V; ++v) {
-      pre[v] = -1;
+      p[v] = -1;
    }
    for (v = 0; v < GR->V; ++v){
-      if (pre[v] == -1){
+      if (p[v] == -1){
          dfsR( GR, v); 
       }
          
    }
       
    for (v = 0; v < GR->V; ++v){
-      vv[post[v]] = v;
+      vv[d[v]] = v;
    }
       
-   // vv[0..V-1] é permutação de GR em pós-ordem
-
-   // fase 2:
+  
+   //chamando busca em profundidade para o Grafo 
    for (v = 0; v < G->V; ++v) sc[v] = -1;
    int k = 0;
    int i;
@@ -90,5 +96,6 @@ int GRAPHstrongCompsK( pGraph G, int *sc,char** names) // recebe o grafo e um ve
       }
    };
    
+   //retorno da quantidade de componentes fortemente conectadas do grafo
    return k;
 }

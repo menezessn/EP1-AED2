@@ -9,7 +9,7 @@
 void visitP(pGraph G, int u, int* cor, List topological){
     cor[u] = 1; //marca como 1 o nó visitado
     link v = G->adj[u];
-    while(v){
+    while(v){ //enquanto tiver adjacências
         if(cor[v->w] == 0){
             visitP(G, v->w, cor, topological);
         }
@@ -22,6 +22,7 @@ void visitP(pGraph G, int u, int* cor, List topological){
     topological->cabeca->next = w;
 }
 
+//busca em profundidade para implementar a ordenação topológica
 void DFS (pGraph G, List topological){
     topological->names = G->names;
     topological->cabeca = (link) malloc (sizeof(node));
@@ -30,17 +31,17 @@ void DFS (pGraph G, List topological){
     int cor [G->V];
     int u;
     for(u = 0 ; u < G->V ; u++){
-        cor[u] = 0;
+        cor[u] = 0; //inicia todos os nós como "não visitados"
     }
     for(u = 0; u < G->V; u++){
-        if(cor[u] == 0){
+        if(cor[u] == 0){ //verifica se o nó não foi visitado
             visitP(G, u, cor, topological);
         }
     }
 }
 
 
-
+//função para printar a ordenação topológica do grafo de componentes fortemente conectados
 void printList(List topological){
     link u = topological->cabeca->next;
     while(u!=NULL){
