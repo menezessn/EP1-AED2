@@ -71,10 +71,12 @@ void inputInsertArc(pGraph G, int num, char** input, char** names){
 
 	while(i<num+1){
 		char* vertexW = strtok(inputCopy[i], delimiters);
+		int aux = 0;
 		while(vertexW != NULL){
 			//printf("%s;", vertexW);
-			if(strcmp(vertexW, names[i-1])==0){
+			if(aux==0){
 				vertexW = strtok(NULL, delimiters);
+				aux++;
 				continue;
 			}
 			graphInsertArc(G, names[i-1], vertexW);
