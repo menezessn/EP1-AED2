@@ -1,0 +1,241 @@
+-------------inicio do código ----------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+
+
+//---------Estruturas para fazer listas de adjacências para representar grafos --------------
+
+typedef int vertex;
+typedef char* vertexName;
+
+// estrutura para cada nó da lista de adjacência 
+typedef struct aux {
+    vertex w; //número do vértice que é vizinho ao vértice v
+    struct aux* next; //endereço do nó seguinte da lista
+} node;
+typedef node* link; //link é um ponteiro para um nó
+
+
+
+//estrutura que implementa um grafo
+typedef struct {
+    int V; //número de vértices do grafo
+    int A; //número de arestas do grafo
+    vertexName* names; //array com os nomes dos vértices
+    link* adj; //array de listas de nós
+}graph;
+
+typedef graph* pGraph; //pGraph é um ponteiro para um grafo
+
+//----------------------------------------------------------------------------------------------------
+
+
+//-----------------Funções para criar grafos com listas de adjacências ---------------------------
+
+//Função que cria o grafo
+//int V é o número de vértices do grafo
+pGraph graphInit(int V, char** names ){
+    pGraph G = (pGraph) malloc(sizeof(graph));
+    G->V = V;
+    G->A = 0;
+    G->adj = (link*) malloc (V*sizeof(link));
+    G->names = (char**) malloc (sizeof(char*)*V);
+    int i;
+    for (i = 0 ; i<V ; i++){
+        G->names[i] = (char*) malloc (sizeof(char)*20);
+    }
+    int v;
+    for (v = 0; v < V; v++){ 
+        G->adj[v] = NULL; 
+        strcpy( G->names[v], names[v]);
+    }
+    return G;
+}
+
+//Cria um novo nó
+link newNode( vertex w, link next) { 
+   link a = (link) malloc( sizeof (node));
+   a->w = w; 
+   a->next = next;     
+   return a;                         
+}
+int findVertexIndex(pGraph G, vertexName name) {
+    int i;
+    for(i = 0; i < G->V; i++) {
+        if(strcmp(G->names[i], name) == 0) {
+            return i;
+        }
+    }
+    return -1; // retorna -1 se não encontrar o vértice com o nome especificado
+}
+
+//Insere o novo nó grafo, criando uma nova aresta
+void graphInsertArc(pGraph G, vertexName nv, vertexName nw){
+    vertex v = findVertexIndex(G, nv);
+    vertex w = findVertexIndex(G, nw);
+    link a = G->adj[v];
+    while(a != NULL){
+        if(a->w == w) return;
+        a = a->next;
+    }
+    G->adj[v] = newNode (w, G->adj[v]);
+    G->A++;
+}
+
+//imprime o grafo
+void printGraph(pGraph G){
+    int i = 0;
+    for(i = 0 ; i < G->V ; i++){
+        link node = G->adj[i];
+        printf ("%s:", G->names[i]);
+        while(node != NULL){
+            printf ("%s;", G->names[node->w]);
+            node = node->next;
+        }
+        printf("\n");
+    }
+}
+
+//----------------------------------------------------------------------
+
+
+//---------funções de leitura de arquivo para receber entradas-------------------
+
+//le a primeira linha do output pra verificar a quantidade de vértices que a entrada vai ter
+int readFirstLine (char* fileName) {
+    int firstLine; //vai receber o valor da primeira linha
+	FILE *fp;
+	fp= fopen(fileName, "r");
+	fscanf (fp, "%d\n", &firstLine);
+	fclose(fp);
+	return firstLine; //retorna o valor da primeira linha
+}
+
+//converte a entrada em texto para um array de strings, onde cada linha está contida em um indíce do array
+char** convertInput (char* fileName, int num){
+	char** input = (char**) malloc ((num+2)*sizeof(char*));
+    int i;
+    for (i = 0 ; i<(num+2) ; i++){
+        input[i] = (char*) malloc (sizeof(char)*100);
+    }
+	
+	FILE *fp;
+	fp= fopen(fileName, "r");
+	int v = 0;
+	while(!feof(fp)){
+		//printf ("\nlendo linha %d ", v);
+		fgets (input[v], 100, fp );
+		input[v][strcspn(input[v], "\n")] = 0;
+		//printf ("\nconteudo: %s ", input[v]);
+		v++;
+	}
+	fclose(fp);
+	return input;
+}
+//faz uma cópia dos inputs
+char** copyInput (char** input, int num){
+	char** inputCopy = (char**) malloc (sizeof(char*)*(num+2));
+	int i;
+	for (i = 0 ; i<(num+2) ; i++){
+		inputCopy[i] = (char*) malloc (sizeof(char)*100);
+	}
+
+	for (i=0 ; i<(num+2) ; i++) {
+		strcpy(inputCopy[i], input[i]);
+	}
+		return inputCopy;
+}
+
+//Le o input e retorna um array com os nomes dos vértices
+char ** readVertexNames(char** input, int num){
+	char** inputCopy = copyInput(input, num);
+	char delimiters[] = ":";
+	char** names = (char**) malloc ((num)*sizeof(char*));
+    int i;
+    for (i = 0 ; i<(num) ; i++){
+        names[i] = (char*) malloc (sizeof(char)*20);
+    }
+	for(i = 0 ; i<num ; i++){
+		names[i] = strtok(inputCopy[i+1], delimiters);
+	}
+	return names;
+}
+
+//Faz as inserções de arestas no grafo
+void inputInsertArc(pGraph G, int num, char** input, char** names){
+	char** inputCopy = copyInput(input, num);
+	char delimiters[] = ":;";
+
+	int i = 1;
+
+	while(i<num+1){
+		char* vertexW = strtok(inputCopy[i], delimiters);
+		while(vertexW != NULL){
+			//printf("%s;", vertexW);
+			if(strcmp(vertexW, names[i-1])==0){
+				vertexW = strtok(NULL, delimiters);
+				continue;
+			}
+			graphInsertArc(G, names[i-1], vertexW);
+			vertexW = strtok(NULL, delimiters);
+		}
+		//printf("\n");
+		i++;
+	}
+	
+}
+
+pGraph graphRandER( int V, int A) { 
+    char ** names = (char**) malloc(V*sizeof(char*));
+    int i;
+    for(i = 0; i<V; i++){
+            names[i] = (char*) malloc(sizeof(char));
+            sprintf(names[i], "%d", i);
+    }
+    static int initialized = 0;
+    if (!initialized) {
+        srand((unsigned) time(NULL));
+        initialized = 1;
+    }
+    double prob = (double) A / (V*(V-1));
+    pGraph G = graphInit(V, names);
+    vertex v;
+    vertex w;
+    for (v = 0; v < V; ++v)
+        for ( w = 0; w < V; ++w)
+            if (v != w){
+                if (rand( ) < prob*(RAND_MAX+1.0)){
+                    char* nv = (char*) malloc(sizeof(char));
+                    sprintf(nv, "%d", v);
+                    char* nw = (char*) malloc(sizeof(char));
+                    sprintf(nw, "%d", w);
+                    graphInsertArc( G, nv, nw);
+                }
+            }
+    return G;
+}
+
+#include "Functions/randomGraph.c"
+
+void main(int argc, char *argv[]){
+    
+}
+
+-------------fim do código ----------------------
+
+
+Formato de entrada é um arquivo txt externo, onde a primeira linha é a quantidade n de vértices, da linha 2 até a linha n+1
+são declarados os nomes dos vértices, depois dois pontos (:) indicam as arestas desse vértice, cada uma separada por ponto e vírgula (;)
+no formato de uma lista de adjacências mesmo, segue exemplo: 
+4
+a: b; c;
+b: e;
+c: e;
+e: a;
+1
+
+Preciso que você implemente uma funções que realizam busca em profundidade, para depois você poder aproveitar essa busca em profundidade para implementar funções que usem o algoritmo de kosaraju para indicar a quantidade de componentes fortemente conectados do grafo, Uma ordenação topológica do grafo de componentes fortemente conectados e A representação em texto do grafo de componentes fortemente conectados

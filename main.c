@@ -1,4 +1,4 @@
-#include "Functions/DFS.c"
+#include "Functions/randomGraph.c"
 
 void main(int argc, char *argv[]){
     if(argc<2) return;
@@ -11,6 +11,5 @@ void main(int argc, char *argv[]){
     //linha 12 e 13 apenas para ver o funcionamento do programa, dps deverão ser excluídas
     printGraph(G); //imprime o grafo
     printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
-
 }
 

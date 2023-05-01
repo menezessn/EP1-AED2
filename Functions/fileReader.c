@@ -1,4 +1,4 @@
-#include "adjList.c"
+#include "AdjList.c"
 
 //---------funções de leitura de arquivo para receber entradas-------------------
 
