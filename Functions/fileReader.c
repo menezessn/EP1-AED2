@@ -11,6 +11,10 @@ int readFirstLine (char* fileName) {
 	fclose(fp);
 	return firstLine; //retorna o valor da primeira linha
 }
+int readLastLine(int V, char** input){
+	int lastLine = atoi(input[V+1]);
+	return lastLine;
+}
 
 //converte a entrada em texto para um array de strings, onde cada linha está contida em um indíce do array
 char** convertInput (char* fileName, int num){
