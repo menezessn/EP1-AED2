@@ -12,15 +12,5 @@ void main(int argc, char *argv[]){
     printGraph(G); //imprime o grafo
     printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
 
-    int numVertices = G->V;
-    int visited[numVertices];
-    int discTime[numVertices];
-    int i;
-    for(i=0; i<numVertices; i++){
-        visited[i] = 0; //marca todos os vértices como não visitados
-        discTime[i] = 0; //inicializa o tempo de descoberta de todos os vértices com 0
-    }
-
-    DFS(G, 0, visited, discTime);
 }
 

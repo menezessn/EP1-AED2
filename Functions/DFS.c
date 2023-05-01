@@ -15,5 +15,7 @@ void DFS(pGraph G, int v, int *visited, int *discTime) {
             DFS(G, w, visited, discTime); // chama a DFS recursivamente
         }
         list = list->next; // avança para o próximo vértice adjacente
+
     }
 }
+
