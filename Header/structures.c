@@ -28,6 +28,7 @@ typedef struct {
 
 typedef graph* pGraph; //pGraph é um ponteiro para um grafo
 
+//estrutura auxiliar para lista
 typedef struct auxList{
     vertexName* names;
     link cabeca;

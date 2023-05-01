@@ -9,25 +9,26 @@ void main(int argc, char *argv[]){
     pGraph G = graphInit(num, names); //inicializa o grafo
     inputInsertArc(G, num, input, names);  //insere as arestas do grafo, devidamente informadas no input
     int* sc = (int*) malloc(sizeof(int)*G->V);
-    int lastLine = readLastLine(G->V, input);
+    int lastLine = readLastLine(G->V, input);//função para ler a ultima linha do arquivo de entrada
     int k;
+    //verificando se utilizará a versão 1 ou 2 do algoritmo de Korasaju
     if(lastLine == 1){
-        k = GRAPHstrongCompsK(G, sc, names);
+        k = graphStrongCompsK(G, sc, names);
     } else if(lastLine == 2){
-        k = GRAPHstrongCompsKV2(G, sc, names);
+        k = graphStrongCompsK_V2(G, sc, names);
     }
     
-
+    //verificando se o grafo é fortemente conexo
     if (k==1){
         printf("Sim\n");
     }else{
         printf("Nao\n");
     }
-    printf("%d\n", k);
+    printf("%d\n", k);//print da quantidade de componentes fortemente conectadas
 
     List topological = (List) malloc(sizeof(list));
-    DFS(G, topological);
-    printList(topological);
+    DFS(G, topological);//busca em profundiade para implementar a ordenação topológica
+    printList(topological);//print da lista de ordenação topológica do grafo de componentes fortemente conectados
     
 
     // //linha 12 e 13 apenas para ver o funcionamento do programa, dps deverão ser excluídas
@@ -35,9 +36,8 @@ void main(int argc, char *argv[]){
     // printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
     // int* sc = (int*) malloc(sizeof(int)*G->V);
 
-    // int k = GRAPHstrongCompsKV2(G, sc, names);
+    // int k = graphStrongCompsK_V2(G, sc, names);
 
-    // printf("Quantidade de componentes fortemente conectados: %d", k);
 
     // int lastLine = readLastLine(G->V, input);
 
@@ -55,7 +55,7 @@ void main(int argc, char *argv[]){
     
 
     // int sc[G->V];
-    // GRAPHstrongCompsK(G, sc, names, input);
+    // graphStrongCompsK(G, sc, names, input);
 
     // //linha 12 e 13 apenas para ver o funcionamento do programa, dps deverão ser excluídas
     // printGraph(G); //imprime o grafo
