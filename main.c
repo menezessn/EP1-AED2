@@ -11,8 +11,9 @@ void main(int argc, char *argv[]){
     //linha 12 e 13 apenas para ver o funcionamento do programa, dps deverão ser excluídas
     printGraph(G); //imprime o grafo
     printf ("O grafo contem %d vertices e %d arestas\n", G->V, G->A); //informação extra
-    int* sc;
+    int* sc = (int*) malloc(sizeof(int)*G->V);
     int k = GRAPHstrongCompsK(G, sc, names);
+
     printf("Quantidade de componentes fortemente conectados: %d", k);
 
     // printf("\nTEste do grafo reverso\n");

@@ -4,7 +4,7 @@ static int cnt, pre[1000]; // pre salva o tempo de descoberta
 static int cntt, post[1000]; //post salva o tempo que foi visitado 
 static vertex vv[1000];
 
-
+//faz uma cópia do array de nomes do array original
 char** copyNames (char** names, int V){
 	char** namesCopy = (char**) malloc (sizeof(char*)*V);
 	int i;
@@ -17,7 +17,7 @@ char** copyNames (char** names, int V){
 	}
 		return namesCopy;
 }
-
+ //cria um grafo reverso
 pGraph createReverseGraph( pGraph G,char** names) {
    char** namesCopy = copyNames(names, G->V);
    pGraph GR = graphInit( G->V, namesCopy);
@@ -50,14 +50,13 @@ static void dfsR( pGraph GR, vertex v)
       if (pre[a->w] == -1){
          dfsR( GR, a->w); 
       }
-      post[v] = cntt++;
       a = a->next;
    }
-      
+   post[v] = cntt++;
 }
 int GRAPHstrongCompsK( pGraph G, int *sc,char** names) // recebe o grafo e um vetor que servirá para mapear os vértices fortemente conexos
 {
-   sc = (int*) malloc(sizeof(int)*G->V);
+   
    // fase 1:
    pGraph GR = createReverseGraph( G,names);
    cnt = 0; 
