@@ -1,4 +1,4 @@
-#include "DFS.c"
+#include "fileReader.c"
 
 static int cnt, pre[1000]; // pre salva o tempo de descoberta
 static int cntt, post[1000]; //post salva o tempo que foi visitado 

@@ -1,4 +1,4 @@
-#include "Functions/TopologicalSorting.c"
+#include "Functions/StronglyConnectedComponentGraph.c"
 
 void main(int argc, char *argv[]){
     //if(argc<2) return;
@@ -28,6 +28,25 @@ void main(int argc, char *argv[]){
     List topological = (List) malloc(sizeof(list));
     DFS(G, topological);
     printList(topological);
+
+    printf("\n");
+
+    char** newNames = createNewNamesArray(G, sc, k);
+    int x;
+    for( x = 0 ; x < k ; x++){
+        printf("teste: %s\n", newNames[x]);
+    }
+
+    int m;
+    for( m = 0 ; m < G->V ; m++){
+        
+        printf ("%d -- " , m );
+        printf("%d -- ", sc[m]);
+        printf("%s -- ", names[m]);
+        printf("%s\n", newNames[sc[m]]);
+
+    }
+    
     
 
     // //linha 12 e 13 apenas para ver o funcionamento do programa, dps deverão ser excluídas
