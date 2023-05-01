@@ -5,7 +5,7 @@ pGraph graphRandER( int V, int A, char** names) {
     names = (char**) malloc(V*sizeof(char*));
     int i;
     for(i = 0; i<V; i++){
-            names[i] = (char*) malloc(sizeof(char));
+            names[i] = (char*) malloc(sizeof(char)*100);
             sprintf(names[i], "%d", i);
     }
     static int initialized = 0;
@@ -15,6 +15,7 @@ pGraph graphRandER( int V, int A, char** names) {
     }
     double prob = (double) A / (V*(V-1));
     pGraph G = graphInit(V, names);
+    G->V = V;
     vertex v;
     vertex w;
     for (v = 0; v < V; ++v)

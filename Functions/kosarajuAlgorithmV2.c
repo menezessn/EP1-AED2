@@ -1,7 +1,7 @@
 #include "randomGraph.c"
 
 //VERSÃO 2 DO ALGORTIMO DE KORASAJU
-int graphStrongCompsK_V2( pGraph G, int *sc,char** names) // recebe o grafo e um vetor que servirá para mapear os vértices fortemente conexos
+int graphStrongCompsK_V2( pGraph G, int *sc) // recebe o grafo e um vetor que servirá para mapear os vértices fortemente conexos
 {
 
    //chamando busca em profundidade para o grafo reverso
@@ -18,7 +18,7 @@ int graphStrongCompsK_V2( pGraph G, int *sc,char** names) // recebe o grafo e um
    }
 
    //criação do grafo reverso
-   pGraph GR = createReverseGraph( G,names);
+   pGraph GR = createReverseGraph( G, G->names);
    
    for (v = 0; v < GR->V; ++v){
       vv[d[v]] = v;

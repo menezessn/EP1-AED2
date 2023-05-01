@@ -25,9 +25,9 @@ void main(int argc, char *argv[]){
 
     //verificando se utilizará a versão 1 ou 2 do algoritmo de Korasaju
     if(kosarajuVersion == 1){
-        k = graphStrongCompsK(G, sc, names);
+        k = graphStrongCompsK(G, sc);
     } else if(kosarajuVersion == 2){
-        k = graphStrongCompsK_V2(G, sc, names);
+        k = graphStrongCompsK_V2(G, sc);
     }
     
     //verificando se o grafo é fortemente conexo
